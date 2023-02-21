@@ -1,0 +1,25 @@
+<button (click)="toggleChart()">{{ buttontext }}</button>
+<table *ngIf="!showChart">
+  <thead>
+    <tr>
+      <th colspan="3">intern-assignment</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+    </tr>
+  </thead>
+  <tr *ngFor="let item of data">
+    <td class="item-id">{{ item.id }}</td>
+    <td class="checkbox">
+      <input
+        type="checkbox"
+        (click)="onCheckboxClick($event, item)"
+        [checked]="isChecked(item.id)"
+      />
+    </td>
+    <td class="name">{{ item.name }}</td>
+    <td>{{ getFormatedDate(item.start) }}</td>
+    <td>{{ getFormatedDate(item.end) }}</td>
+  </tr>
+</table>
+
+<app-chart *ngIf="showChart" [data]="getSelectedItems()"></app-chart>
